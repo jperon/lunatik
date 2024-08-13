@@ -81,8 +81,10 @@ static int luaxtable_pushparams(lua_State *L, const struct xt_action_param *par,
 		pr_err("could not find skb\n");
 		return -1;
 	}
-	if (skb_linearize(skb) != 0)
-          return -1;
+	if (unlikely(data == NULL || skb_linearize(skb) != 0)) {
+		pr_err("could not get skb\n");
+		return -1;
+	}
         luadata_reset(data, skb->data, skb->len, opt);
 
 	lua_newtable(L);
