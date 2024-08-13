@@ -77,10 +77,6 @@ static inline lunatik_object_t *luaxtable_getskb(lua_State *L, luaxtable_t *xtab
 static int luaxtable_pushparams(lua_State *L, const struct xt_action_param *par, luaxtable_t *xtable, const struct sk_buff *skb, uint8_t opt)
 {
 	lunatik_object_t *data = luaxtable_getskb(L, xtable);
-	if (data == NULL) {
-		pr_err("could not find skb\n");
-		return -1;
-	}
 	if (unlikely(data == NULL || skb_linearize(skb) != 0)) {
 		pr_err("could not get skb\n");
 		return -1;
