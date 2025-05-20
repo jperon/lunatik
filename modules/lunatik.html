@@ -33,7 +33,9 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+<li><a href="#runtime">runtime</a></li>
+<li><a href="#lunatik">lunatik</a></li>
 </ul>
 
 
@@ -62,20 +64,34 @@
  used to create new runtimes. Runtime objects themselves have methods
  to control their execution (e.g., <a href="../modules/lunatik.html#resume">resume</a>, <a href="../modules/lunatik.html#stop">stop</a>).</p>
 
+<p> If a global Lunatik environment (<code>lunatik_env</code>) is configured at the C level,
+ it can be exposed to Lua scripts as <a href="../modules/lunatik.html#_ENV">lunatik._ENV</a>. This allows for a shared
+ environment across multiple scripts or runtimes.</p>
 
-<h2><a href="#Functions">Functions</a></h2>
+
+<h2><a href="#Fields">Fields</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#resume">resume (...)</a></td>
+	<td class="name" nowrap><a href="#_ENV">_ENV</a></td>
+	<td class="summary">Shared environment</td>
+	</tr>
+</table>
+<h2><a href="#runtime">runtime</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#resume">resume (runtime, ...)</a></td>
 	<td class="summary">Resumes a Lunatik runtime that has yielded.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#stop">stop (runtime)</a></td>
+	<td class="summary">Stops and releases a Lunatik runtime environment.</td>
+	</tr>
+</table>
+<h2><a href="#lunatik">lunatik</a></h2>
+<table class="function_list">
+	<tr>
 	<td class="name" nowrap><a href="#runtime">runtime (script[, sleep=true])</a></td>
 	<td class="summary">Creates and starts a new Lunatik runtime environment.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#stop">stop ()</a></td>
-	<td class="summary">Stops and releases a Lunatik runtime environment.</td>
 	</tr>
 </table>
 
@@ -83,12 +99,36 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_ENV"></a>
+    <strong>_ENV</strong>
+    </dt>
+    <dd>
+    Shared environment
+
+
+    <ul>
+        <li><span class="parameter">_ENV</span>
+         table this field provides access to shared environment.
+   Scripts can share RCUs through this <a href="../modules/lunatik.html#_ENV">_ENV</a> table.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="runtime"></a>runtime</h2>
 
     <dl class="function">
     <dt>
     <a name = "resume"></a>
-    <strong>resume (...)</strong>
+    <strong>resume (runtime, ...)</strong>
     </dt>
     <dd>
     Resumes a Lunatik runtime that has yielded.
@@ -100,6 +140,11 @@
 
     <h3>Parameters:</h3>
     <ul>
+        <li><span class="parameter">runtime</span>
+
+
+
+        </li>
         <li><span class="parameter">...</span>
          Arguments to pass to the Lua script upon resumption. These arguments will be received by the <code>coroutine.yield()</code> call that suspended the script.
         </li>
@@ -124,13 +169,64 @@
 
 </dd>
     <dt>
+    <a name = "stop"></a>
+    <strong>stop (runtime)</strong>
+    </dt>
+    <dd>
+    Stops and releases a Lunatik runtime environment.
+ This method is called on a Lunatik runtime object. Once stopped, the runtime
+ cannot be resumed or used further. It ensures that the associated Lua state
+ is closed and all kernel resources are freed.</p>
+
+<p> This method provides an explicit way to release the runtime.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">runtime</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">nil</span></span>
+        Does not return any value to Lua.
+    </ol>
+
+    <h3>Raises:</h3>
+    Error May raise an error if the underlying C function encounters a critical issue during cleanup and calls <code>lua_error</code>.
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="comment">-- Assuming 'rt' is a Lunatik runtime object:
+</span>rt:<span class="function-name">stop</span>()</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="lunatik"></a>lunatik</h2>
+
+    <dl class="function">
+    <dt>
     <a name = "runtime"></a>
     <strong>runtime (script[, sleep=true])</strong>
     </dt>
     <dd>
     Creates and starts a new Lunatik runtime environment.
  A Lunatik runtime is an isolated Lua state that can execute Lua scripts
- within the kernel. Each runtime operates independently.
+ within the kernel. Each runtime operates independently.</p>
+
+<p> The userdata object returned by <code>lunatik.runtime()</code> encapsulates an
+ isolated Lua state running within the Linux kernel. Each runtime can be
+ configured as sleepable (allowing blocking operations, using <code>GFP_KERNEL</code>
+ for allocations and mutexes for synchronization) or non-sleepable/atomic
+ (prohibiting blocking operations, using <code>GFP_ATOMIC</code> for allocations and
+ spinlocks for synchronization).
 
 
     <h3>Parameters:</h3>
@@ -161,38 +257,6 @@
 
 
 </dd>
-    <dt>
-    <a name = "stop"></a>
-    <strong>stop ()</strong>
-    </dt>
-    <dd>
-    Stops and releases a Lunatik runtime environment.
- This method is called on a Lunatik runtime object. Once stopped, the runtime
- cannot be resumed or used further. It ensures that the associated Lua state
- is closed and all kernel resources are freed.</p>
-
-<p> This method provides an explicit way to release the runtime.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">nil</span></span>
-        Does not return any value to Lua.
-    </ol>
-
-    <h3>Raises:</h3>
-    Error May raise an error if the underlying C function encounters a critical issue during cleanup and calls <code>lua_error</code>.
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="comment">-- Assuming 'rt' is a Lunatik runtime object:
-</span>rt:<span class="function-name">stop</span>()</pre>
-    </ul>
-
-</dd>
 </dl>
 
 
@@ -200,7 +264,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-20 22:26:41 </i>
+<i style="float:right;">Last updated 2025-05-20 23:32:03 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
