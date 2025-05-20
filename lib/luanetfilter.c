@@ -3,6 +3,14 @@
 * SPDX-License-Identifier: MIT OR GPL-2.0-only
 */
 
+/***
+Low-level Lua interface to the Linux Kernel Netfilter framework.
+This module allows registering Lua functions as Netfilter hooks to inspect
+and modify network packets.
+
+@submodule netfilter
+*/
+
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 #include <linux/module.h>
 #include <linux/version.h>
@@ -115,6 +123,30 @@ static const lunatik_class_t luanetfilter_class = {
 	.sleep = false,
 };
 
+/***
+* Netfilter hook options table
+* @table options
+*   @tfield function hook The Lua function to be called for each packet. It receives a `luadata` object representing the packet buffer (`skb`) and should return an integer verdict (e.g., `netfilter.action.ACCEPT`).
+*   @tfield integer pf The protocol family (e.g., `netfilter.family.INET`)
+*   @tfield integer hooknum The hook number within the protocol family (e.g., `netfilter.inet_hooks.LOCAL_OUT`)
+*   @tfield integer priority The hook priority (e.g., `netfilter.ip_priority.FILTER`).
+*   @tfield mark integer Optional packet mark to match. If set, the hook is only called for packets with this mark.
+*/
+
+
+/***
+* Main function
+* @section register
+*/
+
+/***
+Registers a Netfilter hook.
+The hook function will be called for packets matching the specified criteria.
+@function register
+@tparam table opts Options table as defined above.
+@see options
+@treturn userdata A handle representing the registered hook. This handle can be garbage collected to unregister the hook.
+*/
 static int luanetfilter_register(lua_State *L)
 {
 	luaL_checktype(L, 1, LUA_TTABLE);
