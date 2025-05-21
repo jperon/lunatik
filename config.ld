@@ -16,6 +16,7 @@ file = {
     './lib/luacompletion.c',
     './lib/luadata.c',
     './lib/luafib.c',
+    './lib/luafifo.c',
     './lib/luadevice.c',
     './lunatik_core.c',
     './lib/lunatik/runner.lua',
