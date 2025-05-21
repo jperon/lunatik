@@ -28,6 +28,7 @@ file = {
     './lib/luarcu.c',
     './lib/luasocket.c',
     './lib/luasyscall.c',
+    './lib/luathread.c',
 }
 
 -- examples = "./examples"
