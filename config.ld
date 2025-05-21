@@ -18,12 +18,14 @@ file = {
     './lib/luafib.c',
     './lib/luafifo.c',
     './lib/luadevice.c',
-    './lib/luanotifier.c',
     './lunatik_core.c',
     './lib/lunatik/runner.lua',
     './lib/lualinux.c',
     './lib/luanetfilter.h',
     './lib/luanetfilter.c',
+    './lib/luanotifier.c',
+    './lib/luaprobe.c',
+    './lib/luasyscall.c',
 }
 
 -- examples = "./examples"

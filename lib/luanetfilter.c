@@ -124,21 +124,19 @@ static const lunatik_class_t luanetfilter_class = {
 };
 
 /***
-* Netfilter hook options table
-* @table options
-*   @tfield function hook The Lua function to be called for each packet. It receives a `luadata` object representing the packet buffer (`skb`) and should return an integer verdict (e.g., `netfilter.action.ACCEPT`).
-*   @tfield integer pf The protocol family (e.g., `netfilter.family.INET`)
-*   @tfield integer hooknum The hook number within the protocol family (e.g., `netfilter.inet_hooks.LOCAL_OUT`)
-*   @tfield integer priority The hook priority (e.g., `netfilter.ip_priority.FILTER`).
-*   @tfield mark integer Optional packet mark to match. If set, the hook is only called for packets with this mark.
-* @within Hook options
-*/
-
-/***
 * Registers a Netfilter hook.
 * The hook function will be called for packets matching the specified criteria.
 * @function register
-* @tparam table opts Options table: see `options`.
+* @tparam table opts A table containing the options for the Netfilter hook.
+*   It should have the following fields:
+*
+*   - `hook` (function): The Lua function to be called for each packet.
+*     It receives a `luadata` object representing the packet buffer (`skb`)
+*     and should return an integer verdict (e.g., `netfilter.action.ACCEPT`).
+*   - `pf` (integer): The protocol family (e.g., `netfilter.family.INET`).
+*   - `hooknum` (integer): The hook number within the protocol family (e.g., `netfilter.inet_hooks.LOCAL_OUT`).
+*   - `priority` (integer): The hook priority (e.g., `netfilter.ip_priority.FILTER`).
+*   - `mark` (integer, optional): Packet mark to match. If set, the hook is only called for packets with this mark.
 * @treturn userdata A handle representing the registered hook. This handle can be garbage collected to unregister the hook.
 */
 static int luanetfilter_register(lua_State *L)
