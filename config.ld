@@ -18,6 +18,7 @@ file = {
     './lib/luafib.c',
     './lib/luafifo.c',
     './lib/luadevice.c',
+    './lib/luanotifier.c',
     './lunatik_core.c',
     './lib/lunatik/runner.lua',
     './lib/lualinux.c',
