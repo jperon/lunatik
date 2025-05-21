@@ -30,6 +30,7 @@ file = {
     './lib/luasyscall.c',
     './lib/luathread.c',
     './lib/luaxdp.c',
+    './lib/luaxtable.c',
 }
 
 -- examples = "./examples"
