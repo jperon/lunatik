@@ -14,12 +14,13 @@ title = 'Lunatik API Documentation'
 -- By manually specifying order, we ensure menu order.
 file = {
     './lib/luacompletion.c',
+    './lib/luadata.c',
     './lib/luadevice.c',
     './lunatik_core.c',
     './lib/lunatik/runner.lua',
     './lib/lualinux.c',
-    'lib/luanetfilter.h',
-    'lib/luanetfilter.c',
+    './lib/luanetfilter.h',
+    './lib/luanetfilter.c',
 }
 
 -- examples = "./examples"
