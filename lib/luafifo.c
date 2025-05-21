@@ -4,19 +4,11 @@
 */
 
 /***
-* Provides Lua bindings to the Linux kernel's kfifo (kernel FIFO) implementation.
+* kfifo (kernel FIFO) implementation.
 * This library allows creating and managing fixed-size, lockless FIFO queues
 * for byte streams, suitable for producer-consumer scenarios within the kernel.
 *
 * @module fifo
-*/
-
-/***
-* Represents a kernel FIFO (kfifo) object.
-* This is a userdata object returned by `fifo.new()`. It encapsulates
-* a `struct kfifo` from the Linux kernel, providing a first-in, first-out
-* byte queue.
-* @type fifo
 */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -90,6 +82,14 @@ static void luafifo_release(void *private)
 }
 
 static int luafifo_new(lua_State *L);
+
+/***
+* Represents a kernel FIFO (kfifo) object.
+* This is a userdata object returned by `fifo.new()`. It encapsulates
+* a `struct kfifo` from the Linux kernel, providing a first-in, first-out
+* byte queue.
+* @type fifo
+*/
 
 /***
 * Creates a new kernel FIFO (kfifo) object.

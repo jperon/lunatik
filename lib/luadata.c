@@ -4,7 +4,7 @@
 */
 
 /***
-* Provides Lua bindings for direct memory access and manipulation.
+* Direct memory access and manipulation.
 * This library allows creating `data` objects that represent blocks of memory.
 * These objects can then be used to read and write various integer types
 * (signed/unsigned, 8/16/32/64-bit) and raw byte strings at specific offsets.

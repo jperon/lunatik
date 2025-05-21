@@ -4,7 +4,7 @@
 */
 
 /***
-* Provides Lua bindings to various Linux kernel facilities.
+* Various Linux kernel facilities.
 * This library includes functions for random number generation, task scheduling,
 * time retrieval, kernel symbol lookup, network interface information,
 * byte order conversion, and access to kernel constants like file modes,
@@ -563,4 +563,3 @@ module_init(lualinux_init);
 module_exit(lualinux_exit);
 MODULE_LICENSE("Dual MIT/GPL");
 MODULE_AUTHOR("Lourival Vieira Neto <lourival.neto@ring-0.io>");
-

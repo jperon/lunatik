@@ -35,12 +35,21 @@
 
 static struct class *luadevice_devclass;
 
+/***
+* Represents a character device implemented in Lua.
+* This is a userdata object returned by `device.new()`. It encapsulates
+* the necessary kernel structures (`struct cdev`, `dev_t`) to manage a
+* character device, linking file operations to Lua callback functions.
+* @type device
+*/
 typedef struct luadevice_s {
 	struct list_head entry;
 	lunatik_object_t *runtime;
 	struct cdev *cdev;
 	dev_t devt;
 } luadevice_t;
+
+
 
 static DEFINE_MUTEX(luadevice_mutex);
 static LIST_HEAD(luadevice_list);
@@ -417,4 +426,3 @@ module_init(luadevice_init);
 module_exit(luadevice_exit);
 MODULE_LICENSE("Dual MIT/GPL");
 MODULE_AUTHOR("Lourival Vieira Neto <lourival.neto@ring-0.io>");
-

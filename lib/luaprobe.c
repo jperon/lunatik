@@ -4,7 +4,7 @@
 */
 
 /***
-* Provides Lua bindings to the Linux kernel's kprobes mechanism.
+* kprobes mechanism.
 * This library allows Lua scripts to dynamically probe (instrument) kernel
 * functions or specific instruction addresses. Callbacks can be registered
 * to execute Lua code just before (pre-handler) and/or just after

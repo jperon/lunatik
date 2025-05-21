@@ -23,12 +23,20 @@
 #include "luanetfilter.h"
 #include "luadata.h"
 
+/***
+* Represents a registered Netfilter hook.
+* This is a userdata object returned by `netfilter.register()`. It encapsulates
+* the kernel `struct nf_hook_ops` and associated Lunatik runtime information
+* necessary to invoke the Lua callback when a packet matches the hook criteria.
+* @type netfilter_hook
+*/
 typedef struct luanetfilter_s {
 	lunatik_object_t *runtime;
 	lunatik_object_t *skb;
 	__u32 mark;
 	struct nf_hook_ops nfops;
 } luanetfilter_t;
+
 
 static void luanetfilter_release(void *private);
 

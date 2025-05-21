@@ -25,6 +25,7 @@ file = {
     './lib/luanetfilter.c',
     './lib/luanotifier.c',
     './lib/luaprobe.c',
+    './lib/luarcu.c',
     './lib/luasyscall.c',
 }
 

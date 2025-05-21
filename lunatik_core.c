@@ -18,21 +18,11 @@
 * @module lunatik
 */
 
-#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
-#include <linux/module.h>
-#include <linux/mm.h>
-
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-
-#include "lunatik.h"
-#include "lunatik_sym.h"
-
 /***
 * Shared environment
-* @field _ENV table this field provides access to shared environment.
-*   Scripts can share RCUs through this `_ENV` table.
+* @field _ENV points to a shared global Lunatik runtime object. Scripts can
+* share RCU tables or other Lunatik objects through this mechanism.
+* @within lunatik
 */
 
 #ifdef LUNATIK_RUNTIME
@@ -48,12 +38,27 @@ static inline void lunatik_setversion(lua_State *L)
 #define lunatik_cankrealloc(p, n, f)	\
 	(((f) == GFP_ATOMIC || (n) <= PAGE_SIZE) && (!is_vmalloc_addr(p) || (p) == NULL))
 
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+#include <linux/module.h>
+#include <linux/mm.h>
+
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
+
+#include "lunatik.h"
+#include "lunatik_sym.h"
+
 /***
 * Represents a Lunatik runtime environment.
-*
-* @type Runtime
+* This is a userdata object returned by `lunatik.runtime()`. It encapsulates an
+* isolated Lua state running within the Linux kernel. Each runtime can be
+* configured as sleepable (allowing blocking operations, using `GFP_KERNEL`
+* for allocations and mutexes for synchronization) or non-sleepable/atomic
+* (prohibiting blocking operations, using `GFP_ATOMIC` for allocations and
+* spinlocks for synchronization).
+* @type runtime
 */
-
 static void *lunatik_alloc(void *ud, void *optr, size_t osize, size_t nsize)
 {
 	if (nsize == 0) {
@@ -149,14 +154,12 @@ static inline int lunatik_resume(lua_State *Lto, lua_State *Lfrom, int nargs)
 * Lua's `coroutine.resume`.
 * The `resume` method is called on a Lunatik runtime object.
 * @function resume
-* @param runtime
 * @param ... Arguments to pass to the Lua script upon resumption. These arguments will be received by the `coroutine.yield()` call that suspended the script.
 * @treturn vararg Values returned by the `coroutine.yield()` call if the script yielded again, or values returned by the script if it completed.
 * @raise Error if the runtime cannot be resumed or if an error occurs within the resumed script. The error message will be propagated from the Lua C API error.
 * @usage
 *   -- Assuming 'rt' is a Lunatik runtime object that has yielded.
 *   local success, res_or_err = pcall(function() return rt:resume("arg_to_script") end)
-* @within runtime
 */
 static int lunatik_lresume(lua_State *L)
 {
@@ -194,13 +197,11 @@ static const luaL_Reg lunatik_stub_lib[] = {
 *
 * This method provides an explicit way to release the runtime.
 * @function stop
-* @param runtime
 * @treturn nil Does not return any value to Lua.
 * @raise Error May raise an error if the underlying C function encounters a critical issue during cleanup and calls `lua_error`.
 * @usage
 *   -- Assuming 'rt' is a Lunatik runtime object:
 *   rt:stop()
-* @within runtime
 */
 static const luaL_Reg lunatik_mt[] = {
 	{"__index", lunatik_monitorobject},
@@ -318,7 +319,7 @@ EXPORT_SYMBOL(lunatik_runtime);
 * @tparam[opt=true] boolean sleep If `true` (default), the runtime can sleep (e.g., for I/O operations) and uses `GFP_KERNEL` for allocations.
 *   If `false`, the runtime operates in an atomic context, cannot sleep, and uses `GFP_ATOMIC` for allocations.
 *   This is crucial for runtimes used in contexts that cannot sleep, like Netfilter hooks.
-* @treturn userdata A Lunatik runtime object. This object can be used to interact with the runtime, for example, to resume it if it yields or to stop it.
+* @treturn runtime A Lunatik runtime object. This object can be used to interact with the runtime, for example, to resume it if it yields or to stop it.
 * @raise Error if the Lua state or runtime cannot be allocated, or if the script fails to load or execute.
 * @within lunatik
 */

@@ -15,14 +15,6 @@
 * @module completion
 */
 
-/***
-* Represents a kernel completion object.
-* This is a userdata object returned by `completion.new()`. It encapsulates
-* a `struct completion` from the Linux kernel, used for thread synchronization.
-*
-* @type completion
-*/
-
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 #include <linux/kernel.h>
 #include <linux/module.h>

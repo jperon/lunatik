@@ -4,7 +4,7 @@
 */
 
 /***
-* Provides Lua bindings for accessing kernel system call information.
+* Accessing kernel system call information.
 * This library allows retrieving the kernel address of a system call given its
 * number, and provides a table of system call numbers accessible by their names (see `syscall.numbers`).
 * This is particularly useful for kernel probing (see `probe`)

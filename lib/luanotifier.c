@@ -4,20 +4,12 @@
 */
 
 /***
-* Provides Lua bindings to the Linux kernel's notifier chain mechanism.
+* Notifier chain mechanism.
 * This library allows Lua scripts to register callback functions that are
 * invoked when specific kernel events occur, such as keyboard input,
 * network device status changes, or virtual terminal events.
 *
 * @module notifier
-*/
-
-/***
-* Represents a kernel notifier object.
-* This is a userdata object returned by functions like `notifier.keyboard()`,
-* `notifier.netdevice()`, or `notifier.vterm()`. It encapsulates a
-* `struct notifier_block` and the associated Lua callback.
-* @type notifier
 */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -36,6 +28,14 @@
 
 typedef int (*luanotifier_register_t)(struct notifier_block *nb);
 typedef int (*luanotifier_handler_t)(lua_State *L, void *data);
+
+/***
+* Represents a kernel notifier object.
+* This is a userdata object returned by functions like `notifier.keyboard()`,
+* `notifier.netdevice()`, or `notifier.vterm()`. It encapsulates a
+* `struct notifier_block` and the associated Lua callback.
+* @type notifier
+*/
 
 typedef struct luanotifier_s {
 	struct notifier_block nb;

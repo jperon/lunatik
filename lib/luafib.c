@@ -4,7 +4,7 @@
 */
 
 /***
-* Provides Lua bindings to the Linux kernel's Forwarding Information Base (FIB) rules.
+* Forwarding Information Base (FIB) rules.
 * This library allows Lua scripts to add and delete FIB rules, similar to the
 * user-space `ip rule add` and `ip rule del` commands.
 * FIB rules are used to influence routing decisions by selecting different
