@@ -60,7 +60,12 @@
   <li><a href="../modules/netfilter.html">netfilter</a></li>
   <li><a href="../modules/notifier.html">notifier</a></li>
   <li><a href="../modules/probe.html">probe</a></li>
+  <li><a href="../modules/rcu.html">rcu</a></li>
+  <li><a href="../modules/socket.html">socket</a></li>
   <li><a href="../modules/syscall.html">syscall</a></li>
+  <li><a href="../modules/thread.html">thread</a></li>
+  <li><a href="../modules/xdp.html">xdp</a></li>
+  <li><a href="../modules/xtable.html">xtable</a></li>
 </ul>
 
 </div>
@@ -138,7 +143,7 @@ sudo make install
 
 
 <p>Once done, the <code>debian_kernel_postinst_lunatik.sh</code> script from tools/ may be copied into
-<code>/etc/kernel/postinst.d/</code>: this ensures <a href="../modules/lunatik.html#">lunatik</a> (and also the <code>xdp</code> needed libs) will get
+<code>/etc/kernel/postinst.d/</code>: this ensures <a href="../modules/lunatik.html#">lunatik</a> (and also the <a href="../modules/xdp.html#">xdp</a> needed libs) will get
 compiled on kernel upgrade.</p>
 
 <h3>OpenWRT</h3>
@@ -749,7 +754,7 @@ flags to Lua.</p>
 
 <h3>socket</h3>
 
-<p>The <code>socket</code> library provides support for the kernel
+<p>The <a href="../modules/socket.html#">socket</a> library provides support for the kernel
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/net.h">networking handling</a>.
 This library was inspired by
 <a href="https://github.com/tcz717">Chengzhi Tan</a>'s
@@ -757,7 +762,7 @@ This library was inspired by
 
 <h4><code>socket.new(family, type, protocol)</code></h4>
 
-<p><em>socket.new()</em> creates a new <code>socket</code> object.
+<p><em>socket.new()</em> creates a new <a href="../modules/socket.html#">socket</a> object.
 This function receives the following arguments:
 * <code>family</code>: the available <em>address families</em> are defined by the
 <a href="https://github.com/luainkernel/lunatik#socketaf">socket.af</a> table.
@@ -766,7 +771,7 @@ This function receives the following arguments:
 * <code>protocol</code>: the available <em>protocols</em> are defined by the
 <a href="https://github.com/luainkernel/lunatik#socketipproto">socket.ipproto</a> table.</p>
 
-<h4><code>socket.af</code></h4>
+<h4><a href="../modules/socket.html#af">socket.af</a></h4>
 
 <p><em>socket.af</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/socket.h#L187">address families (AF)</a>
@@ -824,7 +829,7 @@ to Lua.</p>
     <li><code>&quot;MAX&quot;</code>: Maximum.</li>
 </ul>
 
-<h4><code>socket.sock</code></h4>
+<h4><a href="../modules/socket.html#sock">socket.sock</a></h4>
 
 <p><em>socket.sock</em> is a table that exports socket
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/net.h#L49">types (SOCK)</a>:</p>
@@ -843,7 +848,7 @@ to Lua.</p>
 * <code>&quot;CLOEXEC&quot;</code>: n/a.
 * <code>&quot;NONBLOCK&quot;</code>: n/a.</p>
 
-<h4><code>socket.ipproto</code></h4>
+<h4><a href="../modules/socket.html#ipproto">socket.ipproto</a></h4>
 
 <p><em>socket.ipproto</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/latest/source/include/uapi/linux/in.h#L27">IP protocols (IPPROTO)</a>
@@ -901,7 +906,7 @@ The available <em>message flags</em> are defined by the
 If <code>from</code> is <code>true</code>, it returns the received message followed by the peer's address.
 Otherwise, it returns only the received message.</p>
 
-<h4><code>socket.msg</code></h4>
+<h4><a href="../modules/socket.html#msg">socket.msg</a></h4>
 
 <p><em>socket.msg</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/socket.h#L298">message flags</a>
@@ -958,7 +963,7 @@ as default.</p>
 <h4><code>sock:accept([flags])</code></h4>
 
 <p><em>sock:accept()</em> accepts a connection on socket <code>sock</code>.
-It returns a new <code>socket</code> object.
+It returns a new <a href="../modules/socket.html#">socket</a> object.
 The available <em>flags</em> are present on the
 <a href="https://github.com/luainkernel/lunatik#socketsock">socket.sock</a> table.</p>
 
@@ -1005,22 +1010,22 @@ If the <code>sock</code> address family is <code>af.INET</code>, then it returns
 
 <h4><code>inet.tcp()</code></h4>
 
-<p><em>inet.tcp()</em> creates a new <code>socket</code> using
+<p><em>inet.tcp()</em> creates a new <a href="../modules/socket.html#">socket</a> using
 <a href="https://github.com/luainkernel/lunatik#socketaf">af.INET</a> address family,
 <a href="https://github.com/luainkernel/lunatik#socketsock">sock.STREAM</a> type
 and
 <a href="https://github.com/luainkernel/lunatik#socketipproto">ipproto.TCP</a> protocol.
-It overrides <code>socket</code> methods to use addresses as <em>numbers-and-dots notation</em>
+It overrides <a href="../modules/socket.html#">socket</a> methods to use addresses as <em>numbers-and-dots notation</em>
 (e.g., <code>&quot;127.0.0.1&quot;</code>), instead of integers.</p>
 
 <h4><code>inet.udp()</code></h4>
 
-<p><em>inet.udp()</em> creates a new <code>socket</code> using
+<p><em>inet.udp()</em> creates a new <a href="../modules/socket.html#">socket</a> using
 <a href="https://github.com/luainkernel/lunatik#socketaf">af.INET</a> address family,
 <a href="https://github.com/luainkernel/lunatik#socketsock">sock.DGRAM</a> type
 and
 <a href="https://github.com/luainkernel/lunatik#socketipproto">ipproto.UDP</a> protocol.
-It overrides <code>socket</code> methods to use addresses as <em>numbers-and-dots notation</em>
+It overrides <a href="../modules/socket.html#">socket</a> methods to use addresses as <em>numbers-and-dots notation</em>
 (e.g., <code>&quot;127.0.0.1&quot;</code>), instead of integers.</p>
 
 <h5><code>udp:receivefrom(length [, flags])</code></h5>
@@ -1053,7 +1058,7 @@ It overrides <code>socket</code> methods to use addresses as <em>numbers-and-dot
 
 <h3>rcu</h3>
 
-<p>The <code>rcu</code> library provides support for the kernel
+<p>The <a href="../modules/rcu.html#">rcu</a> library provides support for the kernel
 <a href="https://lwn.net/Articles/262464/">Read-copy update (RCU)</a>
 synchronization mechanism.
 This library was inspired by
@@ -1062,7 +1067,7 @@ This library was inspired by
 
 <h4><code>rcu.table([size])</code></h4>
 
-<p><em>rcu.table()</em> creates a new <code>rcu.table</code> object
+<p><em>rcu.table()</em> creates a new <a href="../modules/rcu.html#table">rcu.table</a> object
 which binds the kernel <a href="https://lwn.net/Articles/510202/">generic hash table</a>.
 This function receives as argument the number of buckets rounded up to the next power of 2.
 The default size is <code>1024</code>.
@@ -1070,12 +1075,12 @@ Key must be a string and value must be a Lunatik object or nil.</p>
 
 <h3>thread</h3>
 
-<p>The <code>thread</code> library provides support for the
+<p>The <a href="../modules/thread.html#">thread</a> library provides support for the
 <a href="https://lwn.net/Articles/65178/">kernel thread primitives</a>.</p>
 
 <h4><code>thread.run(runtime, name)</code></h4>
 
-<p><em>thread.run()</em> creates a new <code>thread</code> object and wakes it up.
+<p><em>thread.run()</em> creates a new <a href="../modules/thread.html#">thread</a> object and wakes it up.
 This function receives the following arguments:
 * <code>runtime</code>: the
 <a href="https://github.com/luainkernel/lunatik#lunatikruntimescript--sleep">runtime environment</a>
@@ -1092,7 +1097,7 @@ was called; otherwise, it returns <code>false</code>.</p>
 
 <h4><code>thread.current()</code></h4>
 
-<p><em>thread.current()</em> returns a <code>thread</code> object representing the current task.</p>
+<p><em>thread.current()</em> returns a <a href="../modules/thread.html#">thread</a> object representing the current task.</p>
 
 <h4><code>thrd:stop()</code></h4>
 
@@ -1102,7 +1107,7 @@ on the thread <code>thrd</code> to return true, wakes <code>thrd</code>, and wai
 
 <h4><code>thrd:task()</code></h4>
 
-<p><em>thrd:task()</em> returns a table containing the task information of this <code>thread</code>
+<p><em>thrd:task()</em> returns a table containing the task information of this <a href="../modules/thread.html#">thread</a>
 (e.g., "cpu", "command", "pid" and "tgid").</p>
 
 <h3>fib</h3>
@@ -1308,7 +1313,7 @@ in the system log.</p>
 
 <h3>xdp</h3>
 
-<p>The <code>xdp</code> library provides support for the kernel
+<p>The <a href="../modules/xdp.html#">xdp</a> library provides support for the kernel
 <a href="https://prototype-kernel.readthedocs.io/en/latest/networking/XDP/">eXpress Data Path (XDP)</a>
 subsystem.
 This library was inspired by
@@ -1332,7 +1337,7 @@ This <code>callback</code> receives the following arguments:
 
 <p><em>xdp.detach()</em> unregisters the <code>callback</code> associated with the current <code>runtime</code>, if any.</p>
 
-<h4><code>xdp.action</code></h4>
+<h4><a href="../modules/xdp.html#action">xdp.action</a></h4>
 
 <p><em>xdp.action</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/v6.4/source/include/uapi/linux/bpf.h#L6187">xdp_action</a>
@@ -1348,7 +1353,7 @@ flags to Lua.</p>
 
 <h3>xtable</h3>
 
-<p>The <code>xtable</code> library provides support for developing netfilter <a href="https://inai.de/projects/xtables-addons/">xtable extensions</a>.</p>
+<p>The <a href="../modules/xtable.html#">xtable</a> library provides support for developing netfilter <a href="https://inai.de/projects/xtables-addons/">xtable extensions</a>.</p>
 
 <h4><code>xtable.match(opts)</code></h4>
 
@@ -1607,7 +1612,7 @@ address families to Lua.</p>
 
 <p><em>c:wait()</em> waits for completion of a task until the specified timeout expires.
 The timeout is specified in milliseconds. If the <code>timeout</code> parameter is omitted, it waits indefinitely. Passing a timeout value less than zero results in undefined behavior.
-Threads waiting for events can be interrupted by signals, for example, such as when <code>thread.stop</code> is invoked.
+Threads waiting for events can be interrupted by signals, for example, such as when <a href="../modules/thread.html#thread:stop">thread.stop</a> is invoked.
 Therefore, this function can return in three ways:
 * If it succeeds, it returns <code>true</code>
 * If the timeout is reached, it returns <code>nil, &quot;timeout&quot;</code>
@@ -1896,7 +1901,7 @@ For more details, see its <a href="https://github.com/luainkernel/klibc/blob/lun
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-21 21:43:41 </i>
+<i style="float:right;">Last updated 2025-05-21 23:57:17 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
