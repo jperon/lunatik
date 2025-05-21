@@ -13,6 +13,7 @@ title = 'Lunatik API Documentation'
 -- LDoc will recursively scan directories.
 -- By manually specifying order, we ensure menu order.
 file = {
+    './lib/luacompletion.c',
     './lib/luadevice.c',
     './lunatik_core.c',
     './lib/lunatik/runner.lua',

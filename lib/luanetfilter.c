@@ -4,11 +4,11 @@
 */
 
 /***
-Low-level Lua interface to the Linux Kernel Netfilter framework.
-This module allows registering Lua functions as Netfilter hooks to inspect
-and modify network packets.
-
-@submodule netfilter
+* Low-level Lua interface to the Linux Kernel Netfilter framework.
+* This module allows registering Lua functions as Netfilter hooks to inspect
+* and modify network packets.
+*
+* @module netfilter
 */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -131,21 +131,15 @@ static const lunatik_class_t luanetfilter_class = {
 *   @tfield integer hooknum The hook number within the protocol family (e.g., `netfilter.inet_hooks.LOCAL_OUT`)
 *   @tfield integer priority The hook priority (e.g., `netfilter.ip_priority.FILTER`).
 *   @tfield mark integer Optional packet mark to match. If set, the hook is only called for packets with this mark.
-*/
-
-
-/***
-* Main function
-* @section register
+* @within Hook options
 */
 
 /***
-Registers a Netfilter hook.
-The hook function will be called for packets matching the specified criteria.
-@function register
-@tparam table opts Options table as defined above.
-@see options
-@treturn userdata A handle representing the registered hook. This handle can be garbage collected to unregister the hook.
+* Registers a Netfilter hook.
+* The hook function will be called for packets matching the specified criteria.
+* @function register
+* @tparam table opts Options table: see `options`.
+* @treturn userdata A handle representing the registered hook. This handle can be garbage collected to unregister the hook.
 */
 static int luanetfilter_register(lua_State *L)
 {
@@ -213,4 +207,3 @@ module_init(luanetfilter_init);
 module_exit(luanetfilter_exit);
 MODULE_LICENSE("Dual MIT/GPL");
 MODULE_AUTHOR("Mohammad Shehar Yaar Tausif <sheharyaar48@gmail.com>");
-
