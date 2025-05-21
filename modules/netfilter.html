@@ -33,18 +33,25 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Tables">Tables</a></li>
-<li><a href="#luanetfilter_Functions">luanetfilter Functions</a></li>
 </ul>
 
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/completion.html">completion</a></li>
+  <li><a href="../modules/data.html">data</a></li>
   <li><a href="../modules/device.html">device</a></li>
+  <li><a href="../modules/fib.html">fib</a></li>
+  <li><a href="../modules/fifo.html">fifo</a></li>
   <li><a href="../modules/linux.html">linux</a></li>
   <li><a href="../modules/lunatik.html">lunatik</a></li>
   <li><a href="../modules/lunatik.runner.html">lunatik.runner</a></li>
   <li><strong>netfilter</strong></li>
+  <li><a href="../modules/notifier.html">notifier</a></li>
+  <li><a href="../modules/probe.html">probe</a></li>
+  <li><a href="../modules/syscall.html">syscall</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -60,6 +67,13 @@
 <p> This header file defines constants used by the C implementation and exposed to Lua.</p>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#register">register (opts)</a></td>
+	<td class="summary">Registers a Netfilter hook.</td>
+	</tr>
+</table>
 <h2><a href="#Tables">Tables</a></h2>
 <table class="function_list">
 	<tr>
@@ -95,22 +109,56 @@
 	<td class="summary">Table of Netfilter hooks in the NETDEV family.</td>
 	</tr>
 </table>
-<h2><a href="#luanetfilter_Functions">luanetfilter Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#options">options</a></td>
-	<td class="summary">Netfilter hook options table</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#register">register (opts)</a></td>
-	<td class="summary">Registers a Netfilter hook.</td>
-	</tr>
-</table>
 
 <br/>
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "register"></a>
+    <strong>register (opts)</strong>
+    </dt>
+    <dd>
+    Registers a Netfilter hook.
+ The hook function will be called for packets matching the specified criteria.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a></span>
+
+<p> A table containing the options for the Netfilter hook.
+   It should have the following fields:</p>
+
+<ul>
+    <li><code>hook</code> (function): The Lua function to be called for each packet.
+     It receives a <code>luadata</code> object representing the packet buffer (<code>skb</code>)
+     and should return an integer verdict (e.g., <code>netfilter.action.ACCEPT</code>).</li>
+    <li><code>pf</code> (integer): The protocol family (e.g., <code>netfilter.family.INET</code>).</li>
+    <li><code>hooknum</code> (integer): The hook number within the protocol family (e.g., <code>netfilter.inet_hooks.LOCAL_OUT</code>).</li>
+    <li><code>priority</code> (integer): The hook priority (e.g., <code>netfilter.ip_priority.FILTER</code>).</li>
+    <li><code>mark</code> (integer, optional): Packet mark to match. If set, the hook is only called for packets with this mark.</li>
+</ul>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">userdata</span></span>
+        A handle representing the registered hook. This handle can be garbage collected to unregister the hook.
+    </ol>
+
+
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Tables"></a>Tables</h2>
 
     <dl class="function">
@@ -469,86 +517,13 @@
 
 </dd>
 </dl>
-    <h2 class="section-header "><a name="luanetfilter_Functions"></a>luanetfilter Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "options"></a>
-    <strong>options</strong>
-    </dt>
-    <dd>
-    Netfilter hook options table
-
-
-    <h3>Fields:</h3>
-    <ul>
-        <li><span class="parameter">hook</span>
-            <span class="types"><span class="type">function</span></span>
-         The Lua function to be called for each packet. It receives a <code>luadata</code> object representing the packet buffer (<code>skb</code>) and should return an integer verdict (e.g., <code>netfilter.action.ACCEPT</code>).
-        </li>
-        <li><span class="parameter">pf</span>
-            <span class="types"><span class="type">integer</span></span>
-         The protocol family (e.g., <code>netfilter.family.INET</code>)
-        </li>
-        <li><span class="parameter">hooknum</span>
-            <span class="types"><span class="type">integer</span></span>
-         The hook number within the protocol family (e.g., <code>netfilter.inet_hooks.LOCAL_OUT</code>)
-        </li>
-        <li><span class="parameter">priority</span>
-            <span class="types"><span class="type">integer</span></span>
-         The hook priority (e.g., <code>netfilter.ip_priority.FILTER</code>).
-        </li>
-        <li><span class="parameter">integer</span>
-            <span class="types"><span class="type">mark</span></span>
-         Optional packet mark to match. If set, the hook is only called for packets with this mark.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "register"></a>
-    <strong>register (opts)</strong>
-    </dt>
-    <dd>
-    Registers a Netfilter hook.
-The hook function will be called for packets matching the specified criteria.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">opts</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a></span>
-         Options table as defined above.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">userdata</span></span>
-        A handle representing the registered hook. This handle can be garbage collected to unregister the hook.
-    </ol>
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/netfilter.html#options">options</a>
-    </ul>
-
-
-</dd>
-</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-20 23:32:03 </i>
+<i style="float:right;">Last updated 2025-05-21 21:43:41 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

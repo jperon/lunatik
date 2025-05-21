@@ -49,11 +49,18 @@
 </ul>
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/completion.html">completion</a></li>
+  <li><a href="../modules/data.html">data</a></li>
   <li><a href="../modules/device.html">device</a></li>
+  <li><a href="../modules/fib.html">fib</a></li>
+  <li><a href="../modules/fifo.html">fifo</a></li>
   <li><a href="../modules/linux.html">linux</a></li>
   <li><a href="../modules/lunatik.html">lunatik</a></li>
   <li><a href="../modules/lunatik.runner.html">lunatik.runner</a></li>
   <li><a href="../modules/netfilter.html">netfilter</a></li>
+  <li><a href="../modules/notifier.html">notifier</a></li>
+  <li><a href="../modules/probe.html">probe</a></li>
+  <li><a href="../modules/syscall.html">syscall</a></li>
 </ul>
 
 </div>
@@ -646,12 +653,12 @@ flags to Lua.</p>
 
 <h3>notifier</h3>
 
-<p>The <code>notifier</code> library provides support for the kernel
+<p>The <a href="../modules/notifier.html#">notifier</a> library provides support for the kernel
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/notifier.h">notifier chains</a>.</p>
 
 <h4><code>notifier.keyboard(callback)</code></h4>
 
-<p><em>notifier.keyboard()</em> returns a new keyboard <code>notifier</code> object and installs it in the system.
+<p><em>notifier.keyboard()</em> returns a new keyboard <a href="../modules/notifier.html#">notifier</a> object and installs it in the system.
 The <code>callback</code> function is called whenever a console keyboard event happens
 (e.g., a key has been pressed or released).
 This <code>callback</code> receives the following arguments:
@@ -664,7 +671,7 @@ This <code>callback</code> receives the following arguments:
 <p>The <code>callback</code> function might return the values defined by the
 <a href="https://github.com/luainkernel/lunatik#notifiernotify">notifier.notify</a> table.</p>
 
-<h4><code>notifier.kbd</code></h4>
+<h4><a href="../modules/notifier.html#kbd">notifier.kbd</a></h4>
 
 <p><em>notifier.kbd</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/notifier.h#L229">KBD</a>
@@ -680,7 +687,7 @@ flags to Lua.</p>
 
 <h4><code>notifier.netdevice(callback)</code></h4>
 
-<p><em>notifier.netdevice()</em> returns a new netdevice <code>notifier</code> object and installs it in the system.
+<p><em>notifier.netdevice()</em> returns a new netdevice <a href="../modules/notifier.html#">notifier</a> object and installs it in the system.
 The <code>callback</code> function is called whenever a console netdevice event happens
 (e.g., a network interface has been connected or disconnected).
 This <code>callback</code> receives the following arguments:
@@ -691,7 +698,7 @@ This <code>callback</code> receives the following arguments:
 <p>The <code>callback</code> function might return the values defined by the
 <a href="https://github.com/luainkernel/lunatik#notifiernotify">notifier.notify</a> table.</p>
 
-<h4><code>notifier.netdev</code></h4>
+<h4><a href="../modules/notifier.html#netdev">notifier.netdev</a></h4>
 
 <p><em>notifier.netdev</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/v6.3/source/include/linux/netdevice.h#L2812">NETDEV</a>
@@ -699,7 +706,7 @@ flags to Lua.</p>
 
 <h3><code>notifier.vterm(callback)</code></h3>
 
-<p><em>notifier.vterm()</em> returns a new virtual terminal <code>notifier</code> object and installs it in the system. The <code>callback</code> function is called whenever a virtual terminal event happens (e.g. new character written to the terminal, new terminal allocated, etc).
+<p><em>notifier.vterm()</em> returns a new virtual terminal <a href="../modules/notifier.html#">notifier</a> object and installs it in the system. The <code>callback</code> function is called whenever a virtual terminal event happens (e.g. new character written to the terminal, new terminal allocated, etc).
 The callback function receives the following arguments:
 * <code>event</code>: the available <em>events</em> are defined by the
 <a href="https://github.com/luainkernel/lunatik#notifiervt">notifier.vt</a> table.
@@ -709,7 +716,7 @@ The callback function receives the following arguments:
 <p>The <code>callback</code> function might return the values defined by the
 <a href="https://github.com/luainkernel/lunatik#notifiernotify">notifier.notify</a> table.</p>
 
-<h4><code>notifier.vt</code></h4>
+<h4><a href="../modules/notifier.html#vt">notifier.vt</a></h4>
 
 <p><em>notifier.vt</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/vt.h">VT</a>
@@ -723,7 +730,7 @@ flags to Lua.</p>
     <li><code>&quot;VT_PREWRITE&quot;</code>: before writing character to virtual terminal.</li>
 </ul>
 
-<h4><code>notifier.notify</code></h4>
+<h4><a href="../modules/notifier.html#notify">notifier.notify</a></h4>
 
 <p><em>notifier.notify</em> is a table that exports
 <a href="https://elixir.bootlin.com/linux/latest/source/include/linux/notifier.h#L183">NOTIFY</a>
@@ -738,7 +745,7 @@ flags to Lua.</p>
 
 <h4><code>notfr:delete()</code></h4>
 
-<p><em>notfr:delete()</em> removes a <code>notifier</code> specified by the <code>notfr</code> object from the system.</p>
+<p><em>notfr:delete()</em> removes a <a href="../modules/notifier.html#">notifier</a> specified by the <code>notfr</code> object from the system.</p>
 
 <h3>socket</h3>
 
@@ -1100,7 +1107,7 @@ on the thread <code>thrd</code> to return true, wakes <code>thrd</code>, and wai
 
 <h3>fib</h3>
 
-<p>The <code>fib</code> library provides support for the
+<p>The <a href="../modules/fib.html#">fib</a> library provides support for the
 <a href="https://thermalcircle.de/doku.php?id=blog:linux:routing_decisions_in_the_linux_kernel_1_lookup_packet_flow">kernel Forwarding Information Base</a>.</p>
 
 <h4><code>fib.newrule(table, priority)</code></h4>
@@ -1127,141 +1134,141 @@ provided by <a href="https://wiki.linuxfoundation.org/networking/iproute2">iprou
 
 <h3>data</h3>
 
-<p>The <code>data</code> library provides support for binding the system memory to Lua.</p>
+<p>The <a href="../modules/data.html#">data</a> library provides support for binding the system memory to Lua.</p>
 
 <h4><code>data.new(size)</code></h4>
 
-<p><em>data.new()</em> creates a new <code>data</code> object which allocates <code>size</code> bytes.</p>
+<p><em>data.new()</em> creates a new <a href="../modules/data.html#">data</a> object which allocates <code>size</code> bytes.</p>
 
 <h4><code>d:getnumber(offset)</code></h4>
 
 <p><em>d:getnumber()</em> extracts a <a href="https://www.lua.org/manual/5.4/manual.html#lua_Integer">lua_Integer</a>
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setnumber(offset, number)</code></h4>
 
 <p><em>d:setnumber()</em> insert a <a href="https://www.lua.org/manual/5.4/manual.html#lua_Integer">lua_Integer</a>
-<code>number</code> into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+<code>number</code> into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getbyte(offset)</code></h4>
 
 <p><em>d:getbyte()</em> extracts a byte
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setbyte(offset, byte)</code></h4>
 
 <p><em>d:setbyte()</em> insert a byte
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getstring(offset[, length])</code></h4>
 
 <p><em>d:getstring()</em> extracts a string with <code>length</code> bytes
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero. If <code>length</code> is omitted, it extracts all bytes
-from <code>offset</code> to the end of the <code>data</code>.</p>
+from <code>offset</code> to the end of the <a href="../modules/data.html#">data</a>.</p>
 
 <h4><code>d:setstring(offset, s)</code></h4>
 
 <p><em>d:setstring()</em> insert the string <code>s</code>
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getint8(offset)</code></h4>
 
 <p><em>d:getint8(d, offset)</em> extracts a signed 8-bit integer
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setint8(offset, number)</code></h4>
 
 <p><em>d:setint8()</em> inserts a signed 8-bit number
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getuint8(offset)</code></h4>
 
 <p><em>d:getuint8()</em> extracts an unsigned 8-bit integer
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setuint8(offset, number)</code></h4>
 
 <p><em>d:setuint8()</em> inserts an unsigned 8-bit number
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getint16(offset)</code></h4>
 
 <p><em>d:getint16()</em> extracts a signed 16-bit integer
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setint16(offset, number)</code></h4>
 
 <p><em>d:setint16()</em> inserts a signed 16-bit number
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getuint16(offset)</code></h4>
 
 <p><em>d:getuint16()</em> extracts an unsigned 16-bit integer
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setuint16(offset, number)</code></h4>
 
 <p><em>d:setuint16()</em> inserts an unsigned 16-bit number
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getint32(offset)</code></h4>
 
 <p><em>d:getint32()</em> extracts a signed 32-bit integer
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setint32(offset, number)</code></h4>
 
 <p><em>d:setint32()</em> inserts a signed 32-bit number
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getuint32(offset)</code></h4>
 
 <p><em>d:getuint32()</em> extracts an unsigned 32-bit integer
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setuint32(offset, number)</code></h4>
 
 <p><em>d:setuint32()</em> inserts an unsigned 32-bit number
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:getint64(offset)</code></h4>
 
 <p><em>d:getint64()</em> extracts a signed 64-bit integer
-from the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+from the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h4><code>d:setint64(offset, number)</code></h4>
 
 <p><em>d:setint64()</em> inserts a signed 64-bit number
-into the memory referenced by a <code>data</code> object and a byte <code>offset</code>,
+into the memory referenced by a <a href="../modules/data.html#">data</a> object and a byte <code>offset</code>,
 starting from zero.</p>
 
 <h3>probe</h3>
 
-<p>The <code>probe</code> library provides support for
+<p>The <a href="../modules/probe.html#">probe</a> library provides support for
 <a href="https://docs.kernel.org/trace/kprobes.html">kernel probes</a>.</p>
 
 <h4><code>probe.new(symbol|address, handlers)</code></h4>
 
-<p><em>probe.new()</em> returns a new <code>probe</code> object for monitoring a kernel <code>symbol</code> (string) or <code>address</code> (light userdata)
+<p><em>probe.new()</em> returns a new <a href="../modules/probe.html#">probe</a> object for monitoring a kernel <code>symbol</code> (string) or <code>address</code> (light userdata)
 and installs its <code>handlers</code> in the system.
 The <code>handler</code> <strong>must</strong> be defined as a table containing the following field:
 * <code>pre</code>: function to be called before the probed instruction.
@@ -1277,15 +1284,15 @@ in the system log.</p>
 
 <h4><code>p:stop()</code></h4>
 
-<p><em>p:stop()</em> removes the <code>probe</code> handlers from the system.</p>
+<p><em>p:stop()</em> removes the <a href="../modules/probe.html#">probe</a> handlers from the system.</p>
 
 <h4><code>p:enable(bool)</code></h4>
 
-<p><em>p:enable()</em> enables or disables the <code>probe</code> handlers, accordingly to <code>bool</code>.</p>
+<p><em>p:enable()</em> enables or disables the <a href="../modules/probe.html#">probe</a> handlers, accordingly to <code>bool</code>.</p>
 
 <h3>syscall</h3>
 
-<p>The <code>syscall</code> library provides support for system call addresses and numbers.</p>
+<p>The <a href="../modules/syscall.html#">syscall</a> library provides support for system call addresses and numbers.</p>
 
 <h4><code>syscall.address(number)</code></h4>
 
@@ -1315,8 +1322,8 @@ to be called from an XDP/eBPF program whenever it calls
 <a href="lib/luaxdp.c#L106">bpf<em>luaxdp</em>run</a>
 <a href="https://docs.kernel.org/bpf/kfuncs.html">kfunc</a>.
 This <code>callback</code> receives the following arguments:
-* <code>buffer</code>: a <code>data</code> object representing the network buffer.
-* <code>argument</code>: a <code>data</code> object containing the argument passed by the XDP/eBPF program.</p>
+* <code>buffer</code>: a <a href="../modules/data.html#">data</a> object representing the network buffer.
+* <code>argument</code>: a <a href="../modules/data.html#">data</a> object containing the argument passed by the XDP/eBPF program.</p>
 
 <p>The <code>callback</code> function might return the values defined by the
 <a href="https://github.com/luainkernel/lunatik#xdpaction">xdp.action</a> table.</p>
@@ -1356,7 +1363,7 @@ This function receives the following arguments:
   * <code>match</code> : function to be called for matching packets. It receives the following arguments:</p>
 
 <pre>
-* <span class="backtick"><code>skb</code></span> (readonly): a <span class="backtick"><code>data</code></span> object representing the socket buffer.
+* <span class="backtick"><code>skb</code></span> (readonly): a <span class="backtick"><a href="../modules/data.html#">data</a></span> object representing the socket buffer.
 * <span class="backtick"><code>par</code></span>: a <span class="global">table</span> containing <span class="backtick"><code>hotdrop</code></span>, <span class="backtick"><code>thoff</code></span> (transport header offset) <span class="keyword">and</span> <span class="backtick"><code>fragoff</code></span> (fragment offset) fields.
 * <span class="backtick"><code>userargs</code></span> : a lua <span class="global">string</span> passed from the userspace xtable <span class="global">module</span>.
 * The <span class="keyword">function</span> must <span class="keyword">return</span> <span class="backtick"><code>true</code></span> <span class="keyword">if</span> the packet matches the extension; otherwise, it must <span class="keyword">return</span> <span class="backtick"><code>false</code></span>.
@@ -1378,7 +1385,7 @@ This function receives the following arguments:
   * <code>target</code> : function to be called for targeting packets. It receives the following arguments:</p>
 
 <pre>
-* <span class="backtick"><code>skb</code></span>: a <span class="backtick"><code>data</code></span> object representing the socket buffer.
+* <span class="backtick"><code>skb</code></span>: a <span class="backtick"><a href="../modules/data.html#">data</a></span> object representing the socket buffer.
 * <span class="backtick"><code>par</code></span> (readonly): a <span class="global">table</span> containing <span class="backtick"><code>hotdrop</code></span>, <span class="backtick"><code>thoff</code></span> (transport header offset) <span class="keyword">and</span> <span class="backtick"><code>fragoff</code></span> (fragment offset) fields.
 * <span class="backtick"><code>userargs</code></span> : a lua <span class="global">string</span> passed from the userspace xtable <span class="global">module</span>.
 * The <span class="keyword">function</span> must <span class="keyword">return</span> one of the values defined by the [netfilter.action](https://github.com/luainkernel/lunatik#netfilteraction) <span class="global">table</span>.
@@ -1402,7 +1409,7 @@ This function receives the following arguments:
   * <code>hook</code>: function to be called for the hook. It receives the following arguments:</p>
 
 <pre>
-* <span class="backtick"><code>skb</code></span>: a <span class="backtick"><code>data</code></span> object representing the socket buffer. The object points to the beginning of the packet. In stardard cases, where the Ethernet header is present, it points to its start. Otherwise, the object points to the start of the IP <span class="function-name">header</span> (E.g - <span class="keyword">for</span> hooks <span class="keyword">in</span> <span class="backtick"><code>LOCAL_OUT</code></span>).
+* <span class="backtick"><code>skb</code></span>: a <span class="backtick"><a href="../modules/data.html#">data</a></span> object representing the socket buffer. The object points to the beginning of the packet. In stardard cases, where the Ethernet header is present, it points to its start. Otherwise, the object points to the start of the IP <span class="function-name">header</span> (E.g - <span class="keyword">for</span> hooks <span class="keyword">in</span> <span class="backtick"><code>LOCAL_OUT</code></span>).
 * The <span class="keyword">function</span> must <span class="keyword">return</span> one of the values defined by the [netfilter.action](https://github.com/luainkernel/lunatik#netfilteraction).
 </pre>
 
@@ -1582,15 +1589,15 @@ address families to Lua.</p>
     <li><code>&quot;BRIDGE&quot;</code>: Ethernet Bridge.</li>
 </ul>
 
-<h3><code>completion</code></h3>
+<h3><a href="../modules/completion.html#">completion</a></h3>
 
-<p>The <code>completion</code> library provides support for the <a href="https://docs.kernel.org/scheduler/completion.html">kernel completion primitives</a>.</p>
+<p>The <a href="../modules/completion.html#">completion</a> library provides support for the <a href="https://docs.kernel.org/scheduler/completion.html">kernel completion primitives</a>.</p>
 
 <p>Task completion is a synchronization mechanism used to coordinate the execution of multiple threads, similar to <code>pthread_barrier</code>, it allows threads to wait for a specific event to occur before proceeding, ensuring certain tasks are complete in a race-free manner.</p>
 
 <h4><code>completion.new()</code></h4>
 
-<p><em>completion.new()</em> creates a new <code>completion</code> object.</p>
+<p><em>completion.new()</em> creates a new <a href="../modules/completion.html#">completion</a> object.</p>
 
 <h4><code>c:complete()</code></h4>
 
@@ -1889,7 +1896,7 @@ For more details, see its <a href="https://github.com/luainkernel/klibc/blob/lun
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-20 23:32:03 </i>
+<i style="float:right;">Last updated 2025-05-21 21:43:41 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
