@@ -18,6 +18,17 @@
 * @module lunatik
 */
 
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+#include <linux/module.h>
+#include <linux/mm.h>
+
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
+
+#include "lunatik.h"
+#include "lunatik_sym.h"
+
 /***
 * Shared environment
 * @field _ENV points to a shared global Lunatik runtime object. Scripts can
@@ -37,17 +48,6 @@ static inline void lunatik_setversion(lua_State *L)
 
 #define lunatik_cankrealloc(p, n, f)	\
 	(((f) == GFP_ATOMIC || (n) <= PAGE_SIZE) && (!is_vmalloc_addr(p) || (p) == NULL))
-
-#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
-#include <linux/module.h>
-#include <linux/mm.h>
-
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-
-#include "lunatik.h"
-#include "lunatik_sym.h"
 
 /***
 * Represents a Lunatik runtime environment.

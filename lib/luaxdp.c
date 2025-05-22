@@ -184,7 +184,6 @@ static inline void luaxdp_newdata(lua_State *L)
 * @treturn nil
 * @usage
 *   xdp.detach()
-* @condition KERNEL_VERSION >= 6.4.0 (This Lua binding is available)
 * @within xdp
 */
 static int luaxdp_detach(lua_State *L)
@@ -237,7 +236,6 @@ static int luaxdp_detach(lua_State *L)
 *   -- int verdict = bpf_luaxdp_run(rt_key, sizeof(rt_key), ctx, NULL, 0);
 * @see xdp.action
 * @see data
-* @condition KERNEL_VERSION >= 6.4.0 (This Lua binding is available)
 * @within xdp
 */
 static int luaxdp_attach(lua_State *L)
