@@ -32,32 +32,57 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="modules/byteorder.html">byteorder</a></li>
   <li><a href="modules/completion.html">completion</a></li>
-  <li><a href="modules/crypto.aead.html">crypto.aead</a></li>
-  <li><a href="modules/crypto.comp.html">crypto.comp</a></li>
-  <li><a href="modules/crypto.rng.html">crypto.rng</a></li>
-  <li><a href="modules/crypto.shash.html">crypto.shash</a></li>
-  <li><a href="modules/crypto.skcipher.html">crypto.skcipher</a></li>
+  <li><a href="modules/cpu.html">cpu</a></li>
+  <li><a href="modules/crypto.html">crypto</a></li>
+  <li><a href="modules/darken.html">darken</a></li>
   <li><a href="modules/data.html">data</a></li>
   <li><a href="modules/device.html">device</a></li>
   <li><a href="modules/fib.html">fib</a></li>
   <li><a href="modules/fifo.html">fifo</a></li>
+  <li><a href="modules/hid.html">hid</a></li>
+  <li><a href="modules/lighten.html">lighten</a></li>
   <li><a href="modules/lunatik.html">lunatik</a></li>
   <li><a href="modules/lunatik.runner.html">lunatik.runner</a></li>
   <li><a href="modules/linux.html">linux</a></li>
+  <li><a href="modules/linux.eth.html">linux.eth</a></li>
+  <li><a href="modules/linux.kbd.html">linux.kbd</a></li>
+  <li><a href="modules/linux.netdev.html">linux.netdev</a></li>
+  <li><a href="modules/linux.nf.html">linux.nf</a></li>
+  <li><a href="modules/linux.notify.html">linux.notify</a></li>
+  <li><a href="modules/linux.signal.html">linux.signal</a></li>
+  <li><a href="modules/linux.socket.html">linux.socket</a></li>
+  <li><a href="modules/linux.stat.html">linux.stat</a></li>
+  <li><a href="modules/linux.syscall.html">linux.syscall</a></li>
+  <li><a href="modules/linux.task.html">linux.task</a></li>
+  <li><a href="modules/linux.vt.html">linux.vt</a></li>
+  <li><a href="modules/linux.xdp.html">linux.xdp</a></li>
   <li><a href="modules/mailbox.html">mailbox</a></li>
   <li><a href="modules/net.html">net</a></li>
   <li><a href="modules/netfilter.html">netfilter</a></li>
+  <li><a href="modules/skb.html">skb</a></li>
   <li><a href="modules/notifier.html">notifier</a></li>
   <li><a href="modules/probe.html">probe</a></li>
   <li><a href="modules/rcu.html">rcu</a></li>
+  <li><a href="modules/signal.html">signal</a></li>
   <li><a href="modules/socket.html">socket</a></li>
   <li><a href="modules/socket.inet.html">socket.inet</a></li>
+  <li><a href="modules/socket.raw.html">socket.raw</a></li>
+  <li><a href="modules/socket.unix.html">socket.unix</a></li>
   <li><a href="modules/syscall.html">syscall</a></li>
   <li><a href="modules/syscall.table.html">syscall.table</a></li>
   <li><a href="modules/thread.html">thread</a></li>
   <li><a href="modules/xdp.html">xdp</a></li>
-  <li><a href="modules/xtable.html">xtable</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="classes/crypto.hkdf.html">crypto.hkdf</a></li>
+  <li><a href="classes/crypto_aead.html">crypto_aead</a></li>
+  <li><a href="classes/crypto_comp.html">crypto_comp</a></li>
+  <li><a href="classes/crypto_rng.html">crypto_rng</a></li>
+  <li><a href="classes/crypto_shash.html">crypto_shash</a></li>
+  <li><a href="classes/crypto_skcipher.html">crypto_skcipher</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -74,32 +99,24 @@
 <h2>Modules</h2>
 <table class="module_list">
 	<tr>
+		<td class="name"  nowrap><a href="modules/byteorder.html">byteorder</a></td>
+		<td class="summary">Byte Order Conversion</td>
+	</tr>
+	<tr>
 		<td class="name"  nowrap><a href="modules/completion.html">completion</a></td>
 		<td class="summary">Lua bindings for kernel completion mechanisms.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/crypto.aead.html">crypto.aead</a></td>
-		<td class="summary">AEAD (Authenticated Encryption with Associated Data) operations.</td>
+		<td class="name"  nowrap><a href="modules/cpu.html">cpu</a></td>
+		<td class="summary">Lua interface to Linux CPU abstractions.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/crypto.comp.html">crypto.comp</a></td>
-		<td class="summary">Low-level Lua interface to the Linux Kernel Crypto API for synchronous
- compression algorithms.</td>
+		<td class="name"  nowrap><a href="modules/crypto.html">crypto</a></td>
+		<td class="summary">Lua interface to the Linux Crypto API.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/crypto.rng.html">crypto.rng</a></td>
-		<td class="summary">Low-level Lua interface to the Linux Kernel Crypto API for synchronous
- Random Number Generators (RNG).</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/crypto.shash.html">crypto.shash</a></td>
-		<td class="summary">Low-level Lua interface to the Linux Kernel Crypto API for synchronous
- message digest (hash) algorithms, including HMAC.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/crypto.skcipher.html">crypto.skcipher</a></td>
-		<td class="summary">Low-level Lua interface to the Linux Kernel Crypto API for
- symmetric-key ciphers (SKCIPHER).</td>
+		<td class="name"  nowrap><a href="modules/darken.html">darken</a></td>
+		<td class="summary">Encrypted Lua script execution using AES-256-CTR.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/data.html">data</a></td>
@@ -118,8 +135,16 @@
 		<td class="summary">kfifo (kernel FIFO) implementation.</td>
 	</tr>
 	<tr>
+		<td class="name"  nowrap><a href="modules/hid.html">hid</a></td>
+		<td class="summary">Lua interface to the Linux HID subsystem.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/lighten.html">lighten</a></td>
+		<td class="summary">Encrypted Lua script support (AES-256-CTR).</td>
+	</tr>
+	<tr>
 		<td class="name"  nowrap><a href="modules/lunatik.html">lunatik</a></td>
-		<td class="summary">Core Lunatik module.</td>
+		<td class="summary">Manages Lunatik runtimes — isolated Lua states running in the kernel.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/lunatik.runner.html">lunatik.runner</a></td>
@@ -128,6 +153,54 @@
 	<tr>
 		<td class="name"  nowrap><a href="modules/linux.html">linux</a></td>
 		<td class="summary">Various Linux kernel facilities.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.eth.html">linux.eth</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.eth.html#">linux.eth</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.kbd.html">linux.kbd</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.kbd.html#">linux.kbd</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.netdev.html">linux.netdev</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.netdev.html#">linux.netdev</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.nf.html">linux.nf</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.nf.html#">linux.nf</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.notify.html">linux.notify</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.notify.html#">linux.notify</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.signal.html">linux.signal</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.signal.html#">linux.signal</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.socket.html">linux.socket</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.socket.html#">linux.socket</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.stat.html">linux.stat</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.stat.html#">linux.stat</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.syscall.html">linux.syscall</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.syscall.html#">linux.syscall</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.task.html">linux.task</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.task.html#">linux.task</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.vt.html">linux.vt</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.vt.html#">linux.vt</a>.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/linux.xdp.html">linux.xdp</a></td>
+		<td class="summary">Linux kernel constants exposed under <a href="modules/linux.xdp.html#">linux.xdp</a>.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/mailbox.html">mailbox</a></td>
@@ -139,7 +212,11 @@
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/netfilter.html">netfilter</a></td>
-		<td class="summary">Low-level Lua interface to the Linux Kernel Netfilter framework.</td>
+		<td class="summary">Lua interface to the Linux Netfilter framework.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/skb.html">skb</a></td>
+		<td class="summary">Linux socket buffer interface.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/notifier.html">notifier</a></td>
@@ -147,11 +224,15 @@
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/probe.html">probe</a></td>
-		<td class="summary">kprobes mechanism.</td>
+		<td class="summary">kprobes interface.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/rcu.html">rcu</a></td>
-		<td class="summary">Read-Copy-Update (RCU) synchronized hash table.</td>
+		<td class="summary">RCU-synchronized hash table.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/signal.html">signal</a></td>
+		<td class="summary">POSIX Signals</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/socket.html">socket</a></td>
@@ -160,6 +241,14 @@
 	<tr>
 		<td class="name"  nowrap><a href="modules/socket.inet.html">socket.inet</a></td>
 		<td class="summary">Internet (AF_INET) socket operations.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/socket.raw.html">socket.raw</a></td>
+		<td class="summary">RAW AF_PACKET socket operations.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/socket.unix.html">socket.unix</a></td>
+		<td class="summary">UNIX domain socket (AF_UNIX) operations.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/syscall.html">syscall</a></td>
@@ -177,9 +266,32 @@
 		<td class="name"  nowrap><a href="modules/xdp.html">xdp</a></td>
 		<td class="summary">eXpress Data Path (XDP) integration.</td>
 	</tr>
+</table>
+<h2>Classes</h2>
+<table class="module_list">
 	<tr>
-		<td class="name"  nowrap><a href="modules/xtable.html">xtable</a></td>
-		<td class="summary">Netfilter Xtables extensions.</td>
+		<td class="name"  nowrap><a href="classes/crypto.hkdf.html">crypto.hkdf</a></td>
+		<td class="summary">HMAC-based Extract-and-Expand Key Derivation Function (HKDF) based on RFC 5869.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="classes/crypto_aead.html">crypto_aead</a></td>
+		<td class="summary">Lua interface to AEAD (Authenticated Encryption with Associated Data) ciphers.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="classes/crypto_comp.html">crypto_comp</a></td>
+		<td class="summary">Lua interface to synchronous compression algorithms.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="classes/crypto_rng.html">crypto_rng</a></td>
+		<td class="summary">Lua interface to synchronous Random Number Generators (RNG).</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="classes/crypto_shash.html">crypto_shash</a></td>
+		<td class="summary">Lua interface to synchronous message digest (hash) algorithms, including HMAC.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="classes/crypto_skcipher.html">crypto_skcipher</a></td>
+		<td class="summary">Lua interface to symmetric-key ciphers (SKCIPHER).</td>
 	</tr>
 </table>
 <h2>Topics</h2>
@@ -194,7 +306,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-08-06 14:30:37 </i>
+<i style="float:right;">Last updated 2026-05-07 06:41:05 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -33,7 +33,7 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
 </ul>
 
 
@@ -59,14 +59,14 @@
   <li><a href="../modules/linux.signal.html">linux.signal</a></li>
   <li><a href="../modules/linux.socket.html">linux.socket</a></li>
   <li><a href="../modules/linux.stat.html">linux.stat</a></li>
-  <li><a href="../modules/linux.syscall.html">linux.syscall</a></li>
+  <li><strong>linux.syscall</strong></li>
   <li><a href="../modules/linux.task.html">linux.task</a></li>
   <li><a href="../modules/linux.vt.html">linux.vt</a></li>
   <li><a href="../modules/linux.xdp.html">linux.xdp</a></li>
   <li><a href="../modules/lunatik.html">lunatik</a></li>
   <li><a href="../modules/lunatik.runner.html">lunatik.runner</a></li>
   <li><a href="../modules/mailbox.html">mailbox</a></li>
-  <li><strong>net</strong></li>
+  <li><a href="../modules/net.html">net</a></li>
   <li><a href="../modules/netfilter.html">netfilter</a></li>
   <li><a href="../modules/notifier.html">notifier</a></li>
   <li><a href="../modules/probe.html">probe</a></li>
@@ -100,21 +100,16 @@
 
 <div id="content">
 
-<h1>Module <code>net</code></h1>
-<p>Network utility functions.</p>
-<p> This module provides helper functions for network-related operations,
- primarily for converting between string and integer representations of IPv4 addresses.</p>
+<h1>Module <code>linux.syscall</code></h1>
+<p>Linux kernel constants exposed under <a href="../modules/linux.syscall.html#">linux.syscall</a>.</p>
+<p> Values are populated at build time from the kernel headers.</p>
 
 
-<h2><a href="#Functions">Functions</a></h2>
+<h2><a href="#Tables">Tables</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#aton">aton (addr)</a></td>
-	<td class="summary">Converts an IPv4 address string to its integer representation.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#ntoa">ntoa (ip)</a></td>
-	<td class="summary">Converts an integer representation of an IPv4 address to its string form.</td>
+	<td class="name" nowrap><a href="#numbers">numbers</a></td>
+	<td class="summary">System call numbers (<code>__NR_*</code>) for the build arch.</td>
 	</tr>
 </table>
 
@@ -122,67 +117,22 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
 
     <dl class="function">
     <dt>
-    <a name = "aton"></a>
-    <strong>aton (addr)</strong>
+    <a name = "numbers"></a>
+    <strong>numbers</strong>
     </dt>
     <dd>
-    Converts an IPv4 address string to its integer representation.
- "Address to Number"
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">addr</span>
-         (string) The IPv4 address string (e.g., "127.0.0.1").
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        (number) The IPv4 address as an integer.
-    </ol>
+    System call numbers (<code>__NR_*</code>) for the build arch.
+ Mirrors <code>__NR_*</code> defines in <code>&lt;asm/unistd.h&gt;</code>.
 
 
 
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> ip_int = net.<span class="function-name">aton</span>(<span class="string">"192.168.1.1"</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "ntoa"></a>
-    <strong>ntoa (ip)</strong>
-    </dt>
-    <dd>
-    Converts an integer representation of an IPv4 address to its string form.
- "Number to Address"
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ip</span>
-         (number) The IPv4 address as an integer.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        (string) The IPv4 address string (e.g., "127.0.0.1").
-    </ol>
 
 
 
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> ip_str = net.<span class="function-name">ntoa</span>(<span class="number">3232235777</span>)  <span class="comment">-- "192.168.1.1"</span></pre>
-    </ul>
 
 </dd>
 </dl>

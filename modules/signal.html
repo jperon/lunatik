@@ -66,12 +66,12 @@
   <li><a href="../modules/lunatik.html">lunatik</a></li>
   <li><a href="../modules/lunatik.runner.html">lunatik.runner</a></li>
   <li><a href="../modules/mailbox.html">mailbox</a></li>
-  <li><strong>net</strong></li>
+  <li><a href="../modules/net.html">net</a></li>
   <li><a href="../modules/netfilter.html">netfilter</a></li>
   <li><a href="../modules/notifier.html">notifier</a></li>
   <li><a href="../modules/probe.html">probe</a></li>
   <li><a href="../modules/rcu.html">rcu</a></li>
-  <li><a href="../modules/signal.html">signal</a></li>
+  <li><strong>signal</strong></li>
   <li><a href="../modules/skb.html">skb</a></li>
   <li><a href="../modules/socket.html">socket</a></li>
   <li><a href="../modules/socket.inet.html">socket.inet</a></li>
@@ -100,21 +100,30 @@
 
 <div id="content">
 
-<h1>Module <code>net</code></h1>
-<p>Network utility functions.</p>
-<p> This module provides helper functions for network-related operations,
- primarily for converting between string and integer representations of IPv4 addresses.</p>
+<h1>Module <code>signal</code></h1>
+<p>POSIX Signals</p>
+<p>
+
+</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#aton">aton (addr)</a></td>
-	<td class="summary">Converts an IPv4 address string to its integer representation.</td>
+	<td class="name" nowrap><a href="#kill">kill (pid[, sig])</a></td>
+	<td class="summary">Sends a signal to a process.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#ntoa">ntoa (ip)</a></td>
-	<td class="summary">Converts an integer representation of an IPv4 address to its string form.</td>
+	<td class="name" nowrap><a href="#sigmask">sigmask (sig[, cmd])</a></td>
+	<td class="summary">Modifies signal mask for current task.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sigpending">sigpending ()</a></td>
+	<td class="summary">Checks if the current task has pending signals.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sigstate">sigstate (sig[, state])</a></td>
+	<td class="summary">Checks signal state for current task.</td>
 	</tr>
 </table>
 
@@ -126,62 +135,126 @@
 
     <dl class="function">
     <dt>
-    <a name = "aton"></a>
-    <strong>aton (addr)</strong>
+    <a name = "kill"></a>
+    <strong>kill (pid[, sig])</strong>
     </dt>
     <dd>
-    Converts an IPv4 address string to its integer representation.
- "Address to Number"
+    Sends a signal to a process.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">addr</span>
-         (string) The IPv4 address string (e.g., "127.0.0.1").
+        <li><span class="parameter">pid</span>
+            <span class="types"><span class="type">integer</span></span>
+         Target process ID.
+        </li>
+        <li><span class="parameter">sig</span>
+            <span class="types"><span class="type">integer</span></span>
+         Signal to send (default: <code>KILL</code>, from <a href="../modules/linux.signal.html#">linux.signal</a>).
+         (<em>optional</em>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        (number) The IPv4 address as an integer.
+           <span class="types"><span class="type">boolean</span></span>
+        <code>true</code> on success.
     </ol>
 
+    <h3>Raises:</h3>
+    Error if the process is not found or the operation is not permitted.
 
 
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> ip_int = net.<span class="function-name">aton</span>(<span class="string">"192.168.1.1"</span>)</pre>
-    </ul>
 
 </dd>
     <dt>
-    <a name = "ntoa"></a>
-    <strong>ntoa (ip)</strong>
+    <a name = "sigmask"></a>
+    <strong>sigmask (sig[, cmd])</strong>
     </dt>
     <dd>
-    Converts an integer representation of an IPv4 address to its string form.
- "Number to Address"
+    Modifies signal mask for current task.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">ip</span>
-         (number) The IPv4 address as an integer.
+        <li><span class="parameter">sig</span>
+            <span class="types"><span class="type">integer</span></span>
+         Signal number.
+        </li>
+        <li><span class="parameter">cmd</span>
+            <span class="types"><span class="type">integer</span></span>
+         SIG<em>BLOCK (0, default) or SIG</em>UNBLOCK (1).
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+    <h3>Raises:</h3>
+    Error if the signal is invalid or the operation is not permitted.
+
+
+
+</dd>
+    <dt>
+    <a name = "sigpending"></a>
+    <strong>sigpending ()</strong>
+    </dt>
+    <dd>
+    Checks if the current task has pending signals.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sigstate"></a>
+    <strong>sigstate (sig[, state])</strong>
+    </dt>
+    <dd>
+    Checks signal state for current task.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">sig</span>
+            <span class="types"><span class="type">integer</span></span>
+         Signal number.
+        </li>
+        <li><span class="parameter">state</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+         <code>&quot;blocked&quot;</code> (default), <code>&quot;pending&quot;</code>, or <code>&quot;allowed&quot;</code>.
+         (<em>optional</em>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        (string) The IPv4 address string (e.g., "127.0.0.1").
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
     </ol>
 
 
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> ip_str = net.<span class="function-name">ntoa</span>(<span class="number">3232235777</span>)  <span class="comment">-- "192.168.1.1"</span></pre>
+        <pre class="example"><span class="keyword">local</span> sig = <span class="global">require</span>(<span class="string">"linux.signal"</span>)
+signal.<span class="function-name">sigstate</span>(<span class="number">15</span>) <span class="comment">-- check if SIGTERM is blocked
+</span>signal.<span class="function-name">sigstate</span>(sig.TERM, <span class="string">"pending"</span>)</pre>
     </ul>
 
 </dd>

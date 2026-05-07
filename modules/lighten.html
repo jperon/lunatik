@@ -49,7 +49,7 @@
   <li><a href="../modules/fib.html">fib</a></li>
   <li><a href="../modules/fifo.html">fifo</a></li>
   <li><a href="../modules/hid.html">hid</a></li>
-  <li><a href="../modules/lighten.html">lighten</a></li>
+  <li><strong>lighten</strong></li>
   <li><a href="../modules/linux.html">linux</a></li>
   <li><a href="../modules/linux.eth.html">linux.eth</a></li>
   <li><a href="../modules/linux.kbd.html">linux.kbd</a></li>
@@ -66,7 +66,7 @@
   <li><a href="../modules/lunatik.html">lunatik</a></li>
   <li><a href="../modules/lunatik.runner.html">lunatik.runner</a></li>
   <li><a href="../modules/mailbox.html">mailbox</a></li>
-  <li><strong>net</strong></li>
+  <li><a href="../modules/net.html">net</a></li>
   <li><a href="../modules/netfilter.html">netfilter</a></li>
   <li><a href="../modules/notifier.html">notifier</a></li>
   <li><a href="../modules/probe.html">probe</a></li>
@@ -100,21 +100,17 @@
 
 <div id="content">
 
-<h1>Module <code>net</code></h1>
-<p>Network utility functions.</p>
-<p> This module provides helper functions for network-related operations,
- primarily for converting between string and integer representations of IPv4 addresses.</p>
+<h1>Module <code>lighten</code></h1>
+<p>Encrypted Lua script support (AES-256-CTR).</p>
+<p> This module provides functions to run encrypted Lua scripts
+ using the <a href="../modules/darken.html#">darken</a> C module.</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#aton">aton (addr)</a></td>
-	<td class="summary">Converts an IPv4 address string to its integer representation.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#ntoa">ntoa (ip)</a></td>
-	<td class="summary">Converts an integer representation of an IPv4 address to its string form.</td>
+	<td class="name" nowrap><a href="#run">run (ct, iv)</a></td>
+	<td class="summary">Decrypts and executes an encrypted Lua script.</td>
 	</tr>
 </table>
 
@@ -126,63 +122,33 @@
 
     <dl class="function">
     <dt>
-    <a name = "aton"></a>
-    <strong>aton (addr)</strong>
+    <a name = "run"></a>
+    <strong>run (ct, iv)</strong>
     </dt>
     <dd>
-    Converts an IPv4 address string to its integer representation.
- "Address to Number"
+    Decrypts and executes an encrypted Lua script.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">addr</span>
-         (string) The IPv4 address string (e.g., "127.0.0.1").
+        <li><span class="parameter">ct</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+         Hex-encoded ciphertext.
+        </li>
+        <li><span class="parameter">iv</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+         Hex-encoded 16-byte IV.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        (number) The IPv4 address as an integer.
+        The return values of the decrypted script.
     </ol>
 
 
 
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> ip_int = net.<span class="function-name">aton</span>(<span class="string">"192.168.1.1"</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "ntoa"></a>
-    <strong>ntoa (ip)</strong>
-    </dt>
-    <dd>
-    Converts an integer representation of an IPv4 address to its string form.
- "Number to Address"
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ip</span>
-         (number) The IPv4 address as an integer.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        (string) The IPv4 address string (e.g., "127.0.0.1").
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> ip_str = net.<span class="function-name">ntoa</span>(<span class="number">3232235777</span>)  <span class="comment">-- "192.168.1.1"</span></pre>
-    </ul>
 
 </dd>
 </dl>

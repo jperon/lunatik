@@ -33,7 +33,7 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
+<li><a href="#Class_hid_driver">Class hid_driver </a></li>
 </ul>
 
 
@@ -48,7 +48,7 @@
   <li><a href="../modules/device.html">device</a></li>
   <li><a href="../modules/fib.html">fib</a></li>
   <li><a href="../modules/fifo.html">fifo</a></li>
-  <li><a href="../modules/hid.html">hid</a></li>
+  <li><strong>hid</strong></li>
   <li><a href="../modules/lighten.html">lighten</a></li>
   <li><a href="../modules/linux.html">linux</a></li>
   <li><a href="../modules/linux.eth.html">linux.eth</a></li>
@@ -66,7 +66,7 @@
   <li><a href="../modules/lunatik.html">lunatik</a></li>
   <li><a href="../modules/lunatik.runner.html">lunatik.runner</a></li>
   <li><a href="../modules/mailbox.html">mailbox</a></li>
-  <li><strong>net</strong></li>
+  <li><a href="../modules/net.html">net</a></li>
   <li><a href="../modules/netfilter.html">netfilter</a></li>
   <li><a href="../modules/notifier.html">notifier</a></li>
   <li><a href="../modules/probe.html">probe</a></li>
@@ -100,21 +100,18 @@
 
 <div id="content">
 
-<h1>Module <code>net</code></h1>
-<p>Network utility functions.</p>
-<p> This module provides helper functions for network-related operations,
- primarily for converting between string and integer representations of IPv4 addresses.</p>
+<h1>Module <code>hid</code></h1>
+<p>Lua interface to the Linux HID subsystem.</p>
+<p>
+
+</p>
 
 
-<h2><a href="#Functions">Functions</a></h2>
+<h2><a href="#Class_hid_driver">Class hid_driver </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#aton">aton (addr)</a></td>
-	<td class="summary">Converts an IPv4 address string to its integer representation.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#ntoa">ntoa (ip)</a></td>
-	<td class="summary">Converts an integer representation of an IPv4 address to its string form.</td>
+	<td class="name" nowrap><a href="#hid_driver:register">hid_driver:register (opts)</a></td>
+	<td class="summary">Registers a new HID driver.</td>
 	</tr>
 </table>
 
@@ -122,67 +119,42 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header has-description"><a name="Class_hid_driver"></a>Class hid_driver </h2>
 
+          <div class="section-description">
+          Represents a registered HID driver.
+          </div>
     <dl class="function">
     <dt>
-    <a name = "aton"></a>
-    <strong>aton (addr)</strong>
+    <a name = "hid_driver:register"></a>
+    <strong>hid_driver:register (opts)</strong>
     </dt>
     <dd>
-    Converts an IPv4 address string to its integer representation.
- "Address to Number"
+    Registers a new HID driver.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">addr</span>
-         (string) The IPv4 address string (e.g., "127.0.0.1").
+        <li><span class="parameter">opts</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a></span>
+         driver options: <code>name</code> (string), <code>id_table</code> (array of device ID tables,
+   each with optional integer fields <code>bus</code>, <code>group</code>, <code>vendor</code>, <code>product</code>, <code>driver_data</code>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        (number) The IPv4 address as an integer.
+           <span class="types"><span class="type">hid_driver</span></span>
+
+
+
     </ol>
 
+    <h3>Raises:</h3>
+    if required fields are missing, <code>id_table</code> is invalid, or driver registration fails
 
 
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> ip_int = net.<span class="function-name">aton</span>(<span class="string">"192.168.1.1"</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "ntoa"></a>
-    <strong>ntoa (ip)</strong>
-    </dt>
-    <dd>
-    Converts an integer representation of an IPv4 address to its string form.
- "Number to Address"
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ip</span>
-         (number) The IPv4 address as an integer.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        (string) The IPv4 address string (e.g., "127.0.0.1").
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> ip_str = net.<span class="function-name">ntoa</span>(<span class="number">3232235777</span>)  <span class="comment">-- "192.168.1.1"</span></pre>
-    </ul>
 
 </dd>
 </dl>
